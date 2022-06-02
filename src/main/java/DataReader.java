@@ -15,26 +15,22 @@ public class DataReader extends Exception {
      * @param path a path of CSV file to read data from
      * @return list of arrays of strings containing data from file
      */
+
     public static List<String[]> readData(String path) {
         List<String[]> allData = new ArrayList<>();
-        boolean notValidData=false;
         try {
             FileReader fileReader = new FileReader(path);
             CSVReader csvReader = new CSVReader(fileReader);
             allData = csvReader.readAll();
-            for (int i = 0; i < allData.size(); i++) {
-                for (int j = 0; j < 3; j++) {
-                    if (allData.get(i)[j].isEmpty()) {
-                        notValidData=true;
-                        throw new IllegalArgumentException("Found no data in column: " + allData.get(0)[j] + ", row: " + (i + 1));
-                    }
-                }
-            }
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            if(notValidData){
-                allData.clear();
+        }
+
+        for (int i = 0; i < allData.size(); i++) {
+            for (int j = 0; j < 3; j++) {
+                if (allData.get(i)[j].isEmpty()) {
+                    throw new IllegalArgumentException("Found no data in column: " + allData.get(0)[j] + ", row: " + (i + 1));
+                }
             }
         }
         return allData;
