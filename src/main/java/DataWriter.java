@@ -66,6 +66,7 @@ public class DataWriter {
         Document document = convertListToDocumentXML(data);
         try (FileOutputStream outputStream = new FileOutputStream(path)) {
             writeXml(document, outputStream);
+            System.out.println("XML file written to path: "+path);
         } catch (Exception e) {
             e.printStackTrace();
         }
