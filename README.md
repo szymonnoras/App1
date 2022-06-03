@@ -10,4 +10,4 @@ To run the application you need to:
 - change variable "pathCSV" to path of file which you want to read
 - additionally you can change variable "pathXML" to directory in which XML file will be created
 - run Main.java file
-After those steps XML file will be created in provided directory.
+- After those steps XML file will be created in provided directory.
