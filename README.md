@@ -1,2 +1,4 @@
 # Application nr.1
-Recruitment task for internship for position Java Back-end Software Enigneer Intern.
+Internship recruitment task for position Java Back-end Software Enigneer Intern.
+
+Author: Szymon Noras 
