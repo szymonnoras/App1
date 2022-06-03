@@ -22,35 +22,47 @@ public class DataWriter {
      * @return returns Document object which is ready to be used as XML
      * @throws ParserConfigurationException
      */
-    private static Document convertListToDocumentXML(List<String[]> data) throws ParserConfigurationException {
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
+    private static Document convertListToDocumentXML(List<String[]> data) {
 
-        Document document = builder.newDocument();
-        Element rootElement = document.createElement("cards");
-        document.appendChild(rootElement);
+        DocumentBuilderFactory factory;
+        DocumentBuilder builder = null;
+        try {
+            factory = DocumentBuilderFactory.newInstance();
+            builder = factory.newDocumentBuilder();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        }
 
-        for (int i = 1; i < data.size(); i++) {
-            Element card = document.createElement("card");
-            rootElement.appendChild(card);
+        Document document = null;
 
-            Element name = document.createElement("name");
-            name.appendChild(document.createTextNode(data.get(i)[0]));
-            card.appendChild(name);
+        if (builder != null) {
+            document = builder.newDocument();
 
-            Element surname = document.createElement("surname");
-            surname.appendChild(document.createTextNode(data.get(i)[1]));
-            card.appendChild(surname);
+            Element rootElement = document.createElement("cards");
+            document.appendChild(rootElement);
 
-            Element phone = document.createElement("phone");
-            phone.appendChild(document.createTextNode(data.get(i)[2]));
-            card.appendChild(phone);
+            for (int i = 1; i < data.size(); i++) {
+                Element card = document.createElement("card");
+                rootElement.appendChild(card);
+
+                Element name = document.createElement("name");
+                name.appendChild(document.createTextNode(data.get(i)[0]));
+                card.appendChild(name);
+
+                Element surname = document.createElement("surname");
+                surname.appendChild(document.createTextNode(data.get(i)[1]));
+                card.appendChild(surname);
+
+                Element phone = document.createElement("phone");
+                phone.appendChild(document.createTextNode(data.get(i)[2]));
+                card.appendChild(phone);
+            }
         }
 
         return document;
     }
 
-    public static void writeDataToXML(List<String[]> data, String path) throws ParserConfigurationException {
+    public static void writeDataToXML(List<String[]> data, String path) {
         Document document = convertListToDocumentXML(data);
         try (FileOutputStream outputStream = new FileOutputStream(path)) {
             writeXml(document, outputStream);

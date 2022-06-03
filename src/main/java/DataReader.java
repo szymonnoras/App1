@@ -12,6 +12,7 @@ public class DataReader extends Exception {
      * This method checks if the data in file is valid, but only checks for
      * empty values and file must have proper number of commas between values.
      * If there is empty value it throws proper exception with position of invalid value.
+     *
      * @param path a path of CSV file to read data from
      * @return list of arrays of strings containing data from file
      */
@@ -36,10 +37,10 @@ public class DataReader extends Exception {
         return allData;
     }
 
-    public static void printData(List<String[]> data){
+    public static void printData(List<String[]> data) {
         for (String[] row : data) {
             for (String cell : row) {
-                System.out.print(cell+" ");
+                System.out.print(cell + " ");
             }
             System.out.println();
         }
