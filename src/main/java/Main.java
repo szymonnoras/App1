@@ -4,12 +4,15 @@ import java.util.List;
 
 public class Main {
 
-    public static void main(String[] args) throws ParserConfigurationException {
-        String path = "src/main/resources/data.csv";
-        String pathXML = "src/main/resources/dataaa.xml";
+    //extracts data from CSV file and writes it to XML file.
+    static void writeData(String path){
         List<String[]> data = DataReader.readData(path);
-        //DataReader.printData(data);
-        //DataReader.readData("asd");
-        DataWriter.writeDataToXML(data, pathXML);
+        DataWriter.writeDataToXML(data, "src/main/resources/data.xml");
+    }
+
+    public static void main(String[] args) throws ParserConfigurationException {
+        String pathCSV = "src/main/resources/data.csv";
+
+        writeData(pathCSV);
     }
 }
