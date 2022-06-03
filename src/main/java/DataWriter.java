@@ -15,7 +15,14 @@ import java.io.OutputStream;
 import java.util.List;
 
 public class DataWriter {
-    public static void writeDataToXML(List<String[]> data , String path) throws ParserConfigurationException {
+    /**
+     * Converts List of arrays of String which contains data of business cards to Document object in XML
+     *
+     * @param data contains data extracted from csv file.
+     * @return returns Document object which is ready to be used as XML
+     * @throws ParserConfigurationException
+     */
+    private static Document convertListToDocumentXML(List<String[]> data) throws ParserConfigurationException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
 
@@ -27,23 +34,27 @@ public class DataWriter {
             Element card = document.createElement("card");
             rootElement.appendChild(card);
 
-            Element name=document.createElement("name");
+            Element name = document.createElement("name");
             name.appendChild(document.createTextNode(data.get(i)[0]));
             card.appendChild(name);
 
-            Element surname=document.createElement("surname");
+            Element surname = document.createElement("surname");
             surname.appendChild(document.createTextNode(data.get(i)[1]));
             card.appendChild(surname);
 
-            Element phone=document.createElement("phone");
+            Element phone = document.createElement("phone");
             phone.appendChild(document.createTextNode(data.get(i)[2]));
             card.appendChild(phone);
         }
 
+        return document;
+    }
 
-        try (FileOutputStream outputStream = new FileOutputStream(path)){
+    public static void writeDataToXML(List<String[]> data, String path) throws ParserConfigurationException {
+        Document document = convertListToDocumentXML(data);
+        try (FileOutputStream outputStream = new FileOutputStream(path)) {
             writeXml(document, outputStream);
-        }  catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -59,4 +70,5 @@ public class DataWriter {
 
         transformer.transform(source, result);
     }
+
 }
