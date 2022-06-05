@@ -35,9 +35,14 @@ class DataReaderTest {
     }
 
     @Test
-    void readDataThrowsExceptionForInvalidData() {
+    void validateDataThrowsExceptionForInvalidData() {
         logger.info("executing test");
-        assertThrows(IllegalArgumentException.class, () -> DataReader.readData(invalidData));
+        assertThrows(IllegalArgumentException.class, () -> DataReader.validateData(invalidData));
     }
 
+    @Test
+    void validateDataReturnsValueForValidData(){
+        logger.info("executing test");
+        assertFalse(DataReader.readData(validData).isEmpty());
+    }
 }
